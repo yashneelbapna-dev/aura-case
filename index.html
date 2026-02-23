@@ -1,41 +1,342 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURA CASES | Protect Your World in Style</title>
-  <meta name="description"
-    content="Premium mobile phone covers with elite glassmorphism design. Elevate your device with Aura Cases." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA CASES | Premium Device Protection</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@800&display=swap"
     rel="stylesheet">
+
+  <!-- Icons (Lucide) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div id="root">
-    <div
-      style="background: #050810; color: white; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif; text-align: center; padding: 20px;">
-      <h1 style="color: #7C6DFA; font-size: 3rem; margin-bottom: 10px;">AURA CASES</h1>
-      <p style="color: #6DFADC; font-size: 1.2rem;">Premium Device Protection</p>
-      <div
-        style="margin-top: 40px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); border-radius: 12px; max-width: 500px; backdrop-filter: blur(10px);">
-        <p style="margin-bottom: 15px;">🚀 <b>App is initializing...</b></p>
-        <p style="font-size: 0.9rem; color: #a0a0a8; line-height: 1.5;">
-          If this screen stays like this, it means you are opening the file directly from your folder.
-          <br><br>
-          <b>To see the real website with animations:</b><br>
-          Please type <span
-            style="color: white; background: #333; padding: 2px 6px; border-radius: 4px;">http://localhost:3000</span>
-          into your browser's address bar.
-        </p>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Mesh Background -->
+  <div class="bg-mesh">
+    <div class="blob blob-purple"></div>
+    <div class="blob blob-pink"></div>
+    <div class="blob blob-teal"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo font-syne">AURA <span class="text-gradient">CASES</span></div>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary pill glow">Shop Now</button>
       </div>
     </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <div class="reveal-up delay-1">
+        <span class="badge-pill">Collection 2025</span>
+      </div>
+      <h1 class="hero-title font-syne reveal-up delay-2">
+        Protect <span class="italic font-light">Your</span> <br>
+        <span class="text-gradient">World</span> in Style
+      </h1>
+      <p class="hero-subtitle reveal-up delay-3">
+        Experience high-end device protection with our signature glassmorphism series. Engineered for impact, designed
+        for the elite.
+      </p>
+      <div class="hero-btns reveal-up delay-4">
+        <button class="btn btn-gradient pill glow">View Collection</button>
+        <button class="btn btn-glass pill">Custom Design</button>
+      </div>
+    </div>
+
+    <!-- Floating Hero Element -->
+    <div class="hero-float">
+      <div class="glass-phone-mockup">
+        <div class="mockup-inner"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee Ticker -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>FREE WORLDWIDE SHIPPING</span> <span class="dot purple"></span>
+      <span>MILITARY DROP PROTECTION</span> <span class="dot pink"></span>
+      <span>CUSTOM UV PRINTING</span> <span class="dot teal"></span>
+      <span>MAGSAFE COMPATIBLE</span> <span class="dot purple"></span>
+      <span>1 YEAR WARRANTY</span> <span class="dot pink"></span>
+      <span>500+ MODELS SUPPORTED</span> <span class="dot teal"></span>
+      <!-- Repeat -->
+      <span>FREE WORLDWIDE SHIPPING</span> <span class="dot purple"></span>
+      <span>MILITARY DROP PROTECTION</span> <span class="dot pink"></span>
+      <span>CUSTOM UV PRINTING</span> <span class="dot teal"></span>
+      <span>MAGSAFE COMPATIBLE</span> <span class="dot purple"></span>
+      <span>1 YEAR WARRANTY</span> <span class="dot pink"></span>
+      <span>500+ MODELS SUPPORTED</span> <span class="dot teal"></span>
+    </div>
   </div>
-  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Stats Row -->
+  <section class="stats-row">
+    <div class="container stats-grid">
+      <div class="stat-cell reveal-up">
+        <div class="stat-num text-gradient font-syne" data-target="50000">0</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="stat-cell reveal-up">
+        <div class="stat-num text-gradient font-syne" data-target="120">0</div>
+        <div class="stat-label">Phone Models</div>
+      </div>
+      <div class="stat-cell reveal-up">
+        <div class="stat-num text-gradient font-syne" data-target="500">0</div>
+        <div class="stat-label">Unique Designs</div>
+      </div>
+      <div class="stat-cell reveal-up">
+        <div class="stat-num text-gradient font-syne" data-target="99">0</div>
+        <div class="stat-label">Satisfaction Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collections -->
+  <section id="collections" class="container py-xl">
+    <h2 class="section-title font-syne reveal-up">Elite Collections</h2>
+    <div class="category-grid">
+      <div class="category-card tall glass-card reveal-up tilt-card">
+        <div class="card-content">
+          <span class="card-emoji">🌈</span>
+          <h3 class="font-syne">Gradient Series</h3>
+          <p class="muted">150+ Items</p>
+          <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
+        </div>
+        <span class="watermark">🌈</span>
+      </div>
+      <div class="category-card glass-card reveal-up tilt-card">
+        <div class="card-content">
+          <span class="card-emoji">🛡️</span>
+          <h3 class="font-syne">Rugged Pro</h3>
+          <p class="muted">80+ Items</p>
+          <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
+        </div>
+        <span class="watermark">🛡️</span>
+      </div>
+      <div class="category-card glass-card reveal-up tilt-card">
+        <div class="card-content">
+          <span class="card-emoji">💎</span>
+          <h3 class="font-syne">Crystal Clear</h3>
+          <p class="muted">45+ Items</p>
+          <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
+        </div>
+        <span class="watermark">💎</span>
+      </div>
+      <div class="category-card wide glass-card reveal-up tilt-card">
+        <div class="card-content">
+          <span class="card-emoji">🎨</span>
+          <h3 class="font-syne">Artisan Prints</h3>
+          <p class="muted">120+ Items</p>
+          <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
+        </div>
+        <span class="watermark">🎨</span>
+      </div>
+      <div class="category-card glass-card reveal-up tilt-card">
+        <div class="card-content">
+          <span class="card-emoji">🧲</span>
+          <h3 class="font-syne">MagSafe Ready</h3>
+          <p class="muted">60+ Items</p>
+          <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
+        </div>
+        <span class="watermark">🧲</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <section id="shop" class="container py-xl">
+    <h2 class="section-title font-syne reveal-up">Elite Selection</h2>
+    <div id="product-grid" class="product-grid">
+      <!-- Products will be injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="container py-xl text-center">
+    <h2 class="section-title font-syne reveal-up">Built Different</h2>
+    <div class="features-grid">
+      <div class="feature-card glass-card reveal-up">
+        <div class="feature-icon glow-purple">🛡️</div>
+        <h3 class="font-syne">Military-Grade</h3>
+        <p class="muted">10ft drop tested protection with air-cushion technology.</p>
+        <div class="hover-line"></div>
+      </div>
+      <div class="feature-card glass-card reveal-up">
+        <div class="feature-icon glow-pink">✨</div>
+        <h3 class="font-syne">UV Resistant</h3>
+        <p class="muted">Proprietary finish that prevents yellowing and keeps colors vivid.</p>
+        <div class="hover-line"></div>
+      </div>
+      <div class="feature-card glass-card reveal-up">
+        <div class="feature-icon glow-teal">🌿</div>
+        <h3 class="font-syne">Eco Conscious</h3>
+        <p class="muted">Crafted with 60% recycled materials and plastic-free packaging.</p>
+        <div class="hover-line"></div>
+      </div>
+      <div class="feature-card glass-card reveal-up">
+        <div class="feature-icon glow-purple">🧲</div>
+        <h3 class="font-syne">MagSafe Prep</h3>
+        <p class="muted">Perfect alignment for powerful charging and accessory attachment.</p>
+        <div class="hover-line"></div>
+      </div>
+      <div class="feature-card glass-card reveal-up">
+        <div class="feature-icon glow-pink">🎯</div>
+        <h3 class="font-syne">Precision Fit</h3>
+        <p class="muted">Laser-cut accuracy for every port and tactile button feel.</p>
+        <div class="hover-line"></div>
+      </div>
+      <div class="feature-card glass-card reveal-up">
+        <div class="feature-icon glow-teal">🎨</div>
+        <h3 class="font-syne">Custom Studio</h3>
+        <p class="muted">Infinite possibilities with our in-house custom print engine.</p>
+        <div class="hover-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="container py-xl">
+    <h2 class="section-title font-syne reveal-up">Elite Reviews</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card glass-card reveal-up">
+        <div class="quote-mark text-gradient">“</div>
+        <p class="muted italic">The quality exceeds anything else on the market. The glassmorphism look is stunning
+          under my office lights.</p>
+        <div class="author">
+          <span class="avatar">👨‍💻</span>
+          <div>
+            <p class="bold">Alex Rivers</p>
+            <p class="small muted">New York, USA</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card glass-card reveal-up">
+        <div class="quote-mark text-gradient">“</div>
+        <p class="muted italic">Fastest shipping I've experienced. Packaging was premium and the case fits my S24 Ultra
+          like a glove.</p>
+        <div class="author">
+          <span class="avatar">👩‍🎨</span>
+          <div>
+            <p class="bold">Sophia Chen</p>
+            <p class="small muted">Singapore</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card glass-card reveal-up">
+        <div class="quote-mark text-gradient">“</div>
+        <p class="muted italic">Dropped my phone from a balcony—not a single scratch on the phone. Aura Cases are the
+          real deal.</p>
+        <div class="author">
+          <span class="avatar">📸</span>
+          <div>
+            <p class="bold">Marcus Thorne</p>
+            <p class="small muted">London, UK</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="container py-xl">
+    <div class="cta-banner glass-card reveal-up">
+      <div class="banner-glow-left"></div>
+      <div class="banner-glow-right"></div>
+      <div class="banner-content">
+        <h2 class="font-syne">Find Your <span class="text-gradient">Perfect Case</span> Today</h2>
+        <p class="muted">Join 50,000+ elite users protecting their world in style.</p>
+        <div class="hero-btns justify-center mt-lg">
+          <button class="btn btn-gradient pill glow">Shop Catalog</button>
+          <button class="btn btn-glass pill">Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="logo font-syne mb-md">AURA <span class="text-gradient">CASES</span></div>
+        <p class="muted small mb-lg">Redefining mobile protection through futuristic aesthetics and elite engineering.
+          Stay Aura.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-btn"><i data-lucide="instagram"></i></a>
+          <a href="#" class="social-btn"><i data-lucide="linkedin"></i></a>
+          <a href="#" class="social-btn"><i data-lucide="github"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4 class="font-syne">Shop</h4>
+        <a href="#">New Arrivals</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">iPhone Cases</a>
+        <a href="#">Samsung Cases</a>
+      </div>
+      <div class="footer-links">
+        <h4 class="font-syne">Support</h4>
+        <a href="#">Track Order</a>
+        <a href="#">Shipping Policy</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-links">
+        <h4 class="font-syne">Company</h4>
+        <a href="#">Our Story</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Careers</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p class="small muted">© 2025 AURA CASES. ALL RIGHTS RESERVED.</p>
+      <div class="footer-bottom-links">
+        <a href="#" class="small muted">Privacy Policy</a>
+        <a href="#" class="small muted">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 
 </html>
