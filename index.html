@@ -29,9 +29,8 @@
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
 
-  <!-- Custom Cursor -->
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follow" id="cursorFollow"></div>
 
   <!-- Mesh Background -->
   <div class="bg-mesh">
@@ -63,18 +62,18 @@
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="container hero-content">
-      <div class="reveal-up delay-1">
+      <div class="reveal delay-1">
         <span class="badge-pill">Collection 2025</span>
       </div>
-      <h1 class="hero-title font-syne reveal-up delay-2">
+      <h1 class="hero-title font-syne reveal delay-2">
         Protect <span class="italic font-light">Your</span> <br>
         <span class="text-gradient">World</span> in Style
       </h1>
-      <p class="hero-subtitle reveal-up delay-3">
+      <p class="hero-subtitle reveal delay-3">
         Experience high-end device protection with our signature glassmorphism series. Engineered for impact, designed
         for the elite.
       </p>
-      <div class="hero-btns reveal-up delay-4">
+      <div class="hero-btns reveal delay-4">
         <button class="btn btn-gradient pill glow">View Collection</button>
         <button class="btn btn-glass pill">Custom Design</button>
       </div>
@@ -110,20 +109,20 @@
   <!-- Stats Row -->
   <section class="stats-row">
     <div class="container stats-grid">
-      <div class="stat-cell reveal-up">
+      <div class="stat-cell reveal delay-1">
         <div class="stat-num text-gradient font-syne" data-target="50000">0</div>
         <div class="stat-label">Happy Customers</div>
       </div>
-      <div class="stat-cell reveal-up">
+      <div class="stat-cell reveal delay-2">
         <div class="stat-num text-gradient font-syne" data-target="120">0</div>
         <div class="stat-label">Phone Models</div>
       </div>
-      <div class="stat-cell reveal-up">
+      <div class="stat-cell reveal delay-3">
         <div class="stat-num text-gradient font-syne" data-target="500">0</div>
         <div class="stat-label">Unique Designs</div>
       </div>
-      <div class="stat-cell reveal-up">
-        <div class="stat-num text-gradient font-syne" data-target="99">0</div>
+      <div class="stat-cell reveal delay-4">
+        <div class="stat-num text-gradient font-syne" data-target="98">0</div>
         <div class="stat-label">Satisfaction Rate</div>
       </div>
     </div>
@@ -131,9 +130,9 @@
 
   <!-- Collections -->
   <section id="collections" class="container py-xl">
-    <h2 class="section-title font-syne reveal-up">Elite Collections</h2>
+    <h2 class="section-title font-syne reveal">Elite Collections</h2>
     <div class="category-grid">
-      <div class="category-card tall glass-card reveal-up tilt-card">
+      <div class="category-card tall glass-card reveal delay-1 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🌈</span>
           <h3 class="font-syne">Gradient Series</h3>
@@ -142,7 +141,7 @@
         </div>
         <span class="watermark">🌈</span>
       </div>
-      <div class="category-card glass-card reveal-up tilt-card">
+      <div class="category-card glass-card reveal delay-2 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🛡️</span>
           <h3 class="font-syne">Rugged Pro</h3>
@@ -151,7 +150,7 @@
         </div>
         <span class="watermark">🛡️</span>
       </div>
-      <div class="category-card glass-card reveal-up tilt-card">
+      <div class="category-card glass-card reveal delay-3 tilt-card">
         <div class="card-content">
           <span class="card-emoji">💎</span>
           <h3 class="font-syne">Crystal Clear</h3>
@@ -160,7 +159,7 @@
         </div>
         <span class="watermark">💎</span>
       </div>
-      <div class="category-card wide glass-card reveal-up tilt-card">
+      <div class="category-card wide glass-card reveal delay-4 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🎨</span>
           <h3 class="font-syne">Artisan Prints</h3>
@@ -169,7 +168,7 @@
         </div>
         <span class="watermark">🎨</span>
       </div>
-      <div class="category-card glass-card reveal-up tilt-card">
+      <div class="category-card glass-card reveal delay-1 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🧲</span>
           <h3 class="font-syne">MagSafe Ready</h3>
@@ -183,7 +182,16 @@
 
   <!-- Product Grid -->
   <section id="shop" class="container py-xl">
-    <h2 class="section-title font-syne reveal-up">Elite Selection</h2>
+    <h2 class="section-title font-syne reveal">Elite Selection</h2>
+
+    <!-- Filter Pills -->
+    <div class="filter-container reveal delay-1">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="iPhone">iPhone</button>
+      <button class="filter-btn" data-filter="Samsung">Samsung</button>
+      <button class="filter-btn" data-filter="OnePlus">OnePlus</button>
+    </div>
+
     <div id="product-grid" class="product-grid">
       <!-- Products will be injected by JavaScript -->
     </div>
@@ -191,39 +199,39 @@
 
   <!-- Features -->
   <section id="features" class="container py-xl text-center">
-    <h2 class="section-title font-syne reveal-up">Built Different</h2>
+    <h2 class="section-title font-syne reveal">Built Different</h2>
     <div class="features-grid">
-      <div class="feature-card glass-card reveal-up">
+      <div class="feature-card glass-card reveal delay-1 tilt-card">
         <div class="feature-icon glow-purple">🛡️</div>
         <h3 class="font-syne">Military-Grade</h3>
         <p class="muted">10ft drop tested protection with air-cushion technology.</p>
         <div class="hover-line"></div>
       </div>
-      <div class="feature-card glass-card reveal-up">
+      <div class="feature-card glass-card reveal delay-2 tilt-card">
         <div class="feature-icon glow-pink">✨</div>
         <h3 class="font-syne">UV Resistant</h3>
         <p class="muted">Proprietary finish that prevents yellowing and keeps colors vivid.</p>
         <div class="hover-line"></div>
       </div>
-      <div class="feature-card glass-card reveal-up">
+      <div class="feature-card glass-card reveal delay-3 tilt-card">
         <div class="feature-icon glow-teal">🌿</div>
         <h3 class="font-syne">Eco Conscious</h3>
         <p class="muted">Crafted with 60% recycled materials and plastic-free packaging.</p>
         <div class="hover-line"></div>
       </div>
-      <div class="feature-card glass-card reveal-up">
+      <div class="feature-card glass-card reveal delay-4 tilt-card">
         <div class="feature-icon glow-purple">🧲</div>
         <h3 class="font-syne">MagSafe Prep</h3>
         <p class="muted">Perfect alignment for powerful charging and accessory attachment.</p>
         <div class="hover-line"></div>
       </div>
-      <div class="feature-card glass-card reveal-up">
+      <div class="feature-card glass-card reveal delay-1 tilt-card">
         <div class="feature-icon glow-pink">🎯</div>
         <h3 class="font-syne">Precision Fit</h3>
         <p class="muted">Laser-cut accuracy for every port and tactile button feel.</p>
         <div class="hover-line"></div>
       </div>
-      <div class="feature-card glass-card reveal-up">
+      <div class="feature-card glass-card reveal delay-2 tilt-card">
         <div class="feature-icon glow-teal">🎨</div>
         <h3 class="font-syne">Custom Studio</h3>
         <p class="muted">Infinite possibilities with our in-house custom print engine.</p>
@@ -234,9 +242,9 @@
 
   <!-- Testimonials -->
   <section class="container py-xl">
-    <h2 class="section-title font-syne reveal-up">Elite Reviews</h2>
+    <h2 class="section-title font-syne reveal">Elite Reviews</h2>
     <div class="testimonial-grid">
-      <div class="testimonial-card glass-card reveal-up">
+      <div class="testimonial-card glass-card reveal delay-1">
         <div class="quote-mark text-gradient">“</div>
         <p class="muted italic">The quality exceeds anything else on the market. The glassmorphism look is stunning
           under my office lights.</p>
@@ -248,7 +256,7 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card glass-card reveal-up">
+      <div class="testimonial-card glass-card reveal delay-2">
         <div class="quote-mark text-gradient">“</div>
         <p class="muted italic">Fastest shipping I've experienced. Packaging was premium and the case fits my S24 Ultra
           like a glove.</p>
@@ -260,7 +268,7 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card glass-card reveal-up">
+      <div class="testimonial-card glass-card reveal delay-3">
         <div class="quote-mark text-gradient">“</div>
         <p class="muted italic">Dropped my phone from a balcony—not a single scratch on the phone. Aura Cases are the
           real deal.</p>
@@ -277,7 +285,7 @@
 
   <!-- CTA Banner -->
   <section class="container py-xl">
-    <div class="cta-banner glass-card reveal-up">
+    <div class="cta-banner glass-card reveal">
       <div class="banner-glow-left"></div>
       <div class="banner-glow-right"></div>
       <div class="banner-content">
