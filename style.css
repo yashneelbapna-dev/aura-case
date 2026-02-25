@@ -676,27 +676,43 @@ body,
     z-index: 1;
 }
 
+/* ─── Section Header ─── */
+.section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.section-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
 /* ─── Filter Pills ─── */
-.filter-container {
+.filter-pills {
     display: flex;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     margin-bottom: 3rem;
     flex-wrap: wrap;
 }
 
 .filter-btn {
-    padding: 0.6rem 1.5rem;
-    border-radius: 999px;
+    padding: 0.5rem 1.4rem;
+    border-radius: 100px;
     font-weight: 500;
     font-family: var(--font-body);
     cursor: pointer;
     transition: all 0.2s ease;
-    background: var(--surface);
+    background: transparent;
     border: 1px solid var(--border);
     color: var(--text-secondary);
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
 }
 
 .filter-btn:hover {
@@ -711,96 +727,120 @@ body,
     box-shadow: none;
 }
 
-/* ─── Product Cards ─── */
+/* ─── Products Grid ─── */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+
+/* ─── Product Card ─── */
 .product-card {
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+html.dark .product-card:hover,
+:root .product-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+html.light .product-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not(.dark) .product-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
 }
 
 .product-card.hidden {
     opacity: 0;
     transform: scale(0.95);
     pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
-}
-
-.product-card {
-    padding: 1rem;
-}
-
+/* ─── Product Image Area ─── */
 .product-image-area {
-    aspect-ratio: 3/4;
-    border-radius: 12px;
-    margin-bottom: 1.25rem;
+    aspect-ratio: 3 / 4;
+    background: var(--bg-secondary);
     position: relative;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
+/* ─── Phone Shape (theme-aware colors via custom properties) ─── */
 .phone-shape {
-    width: 56px;
-    height: 110px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
+    width: 55%;
+    aspect-ratio: 9 / 19;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: var(--phone-dark, #2A2A2A);
+    transition: background-color 0.3s ease;
 }
 
+html.light .phone-shape {
+    background: var(--phone-light, #E8E8E8);
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not(.dark) .phone-shape {
+        background: var(--phone-light, #E8E8E8);
+    }
+}
+
+/* ─── Product Badge ─── */
 .product-badge {
     position: absolute;
     top: 0.75rem;
     left: 0.75rem;
-    padding: 0.3rem 0.7rem;
+    padding: 0.3rem 0.65rem;
     border-radius: 999px;
     font-size: 0.65rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: white;
 }
 
 .badge-new {
-    background: var(--accent);
-    color: var(--bg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
 }
 
 .badge-hot {
-    background: #333333;
-    color: #F5F5F5;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
 }
 
-html.light .badge-hot {
-    background: #E0E0E0;
-    color: #333333;
-}
-
-@media (prefers-color-scheme: light) {
-    :root .badge-hot {
-        background: #E0E0E0;
-        color: #333333;
-    }
-}
-
+/* ─── Wishlist Button ─── */
 .wishlist-btn {
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--surface);
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: white;
-    font-size: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
     line-height: 1;
     padding: 0;
     transition: all 0.2s ease;
@@ -808,51 +848,39 @@ html.light .badge-hot {
 }
 
 .wishlist-btn:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--surface-hover);
+    color: var(--text-primary);
     transform: scale(1.05);
 }
 
 .wishlist-btn.active {
-    background: rgba(200, 50, 80, 0.8);
-    border-color: rgba(200, 50, 80, 0.9);
-    color: white;
-}
-
-@keyframes heartBounce {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    color: #C83250;
+    border-color: #C83250;
 }
 
 /* ─── Product Info ─── */
 .product-info {
-    margin-top: 1rem;
+    padding: 1.2rem;
 }
 
 .rating {
-    color: #C4A34A;
+    color: var(--text-secondary);
     font-size: 0.75rem;
     margin-bottom: 0.4rem;
     letter-spacing: 1px;
 }
 
 .product-info h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
     letter-spacing: -0.01em;
+    color: var(--text-primary);
 }
 
-.product-info p.muted {
-    font-size: 0.8rem;
+.product-info .product-compat {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
     margin-bottom: 0.75rem;
 }
 
@@ -862,21 +890,27 @@ html.light .badge-hot {
     align-items: center;
 }
 
-.price-box .bold {
-    font-size: 1rem;
-    color: var(--text-primary);
-    font-weight: 500;
+.price-box {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
 }
 
-.old-price {
+.price-box .price-current {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.price-box .price-old {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
     text-decoration: line-through;
-    margin-left: 0.5rem;
-    opacity: 0.5;
 }
 
 .add-btn {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: var(--btn-primary-bg);
     color: var(--btn-primary-text);
@@ -885,7 +919,7 @@ html.light .badge-hot {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 500;
     line-height: 1;
     padding: 0;
@@ -900,7 +934,7 @@ html.light .badge-hot {
 .add-btn.success {
     background: var(--accent) !important;
     color: var(--bg) !important;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 /* ─── Features ─── */
@@ -1218,7 +1252,7 @@ html.light .badge-hot {
         padding: 1.25rem;
     }
 
-    .product-grid {
+    .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
     }

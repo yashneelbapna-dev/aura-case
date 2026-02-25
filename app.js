@@ -217,14 +217,14 @@ function applyTilt() {
 // 7. Product Cards
 // ───────────────────────────────────────────────
 const demoProducts = [
-    { id: 1, name: 'Aurora Dream', price: 899, old_price: 1299, badge: 'Hot', gradient: 'linear-gradient(135deg, #7C6DFA, #FA6D9A)', category: 'iPhone 15 Pro Max', rating: 5 },
-    { id: 2, name: 'Ocean Breeze', price: 799, old_price: 999, badge: 'New', gradient: 'linear-gradient(135deg, #6DFADC, #6D9EFA)', category: 'Samsung S24 Ultra', rating: 5 },
-    { id: 3, name: 'Golden Hour', price: 749, old_price: null, badge: 'Hot', gradient: 'linear-gradient(135deg, #FA9A6D, #FADC6D)', category: 'OnePlus 12 Pro', rating: 5 },
-    { id: 4, name: 'Neon Galaxy', price: 849, old_price: 1199, badge: 'New', gradient: 'linear-gradient(135deg, #D06DFA, #FA6D6D)', category: 'Pixel 9 Pro', rating: 5 },
-    { id: 5, name: 'Mint Forest', price: 699, old_price: null, badge: 'New', gradient: 'linear-gradient(135deg, #6DFA9A, #6DFADC)', category: 'iPhone 15', rating: 5 },
-    { id: 6, name: 'Crimson Blaze', price: 649, old_price: 899, badge: 'Hot', gradient: 'linear-gradient(135deg, #FA6D6D, #FA9A6D)', category: 'Samsung A55', rating: 5 },
-    { id: 7, name: 'Deep Space', price: 599, old_price: null, badge: 'New', gradient: 'linear-gradient(135deg, #6D9EFA, #D06DFA)', category: 'OnePlus Nord 4', rating: 5 },
-    { id: 8, name: 'Citrus Summer', price: 549, old_price: 799, badge: 'Hot', gradient: 'linear-gradient(135deg, #FADC6D, #6DFA9A)', category: 'Realme GT 6', rating: 5 }
+    { id: 1, name: 'Aurora Dream', price: 899, old_price: 1299, badge: 'NEW', category: 'iPhone 15 Pro Max', rating: 5, phoneLight: '#E8E8E8', phoneDark: '#2A2A2A' },
+    { id: 2, name: 'Ocean Breeze', price: 799, old_price: 999, badge: 'HOT', category: 'Samsung S24 Ultra', rating: 5, phoneLight: '#DCDCDC', phoneDark: '#252525' },
+    { id: 3, name: 'Golden Hour', price: 749, old_price: null, badge: null, category: 'OnePlus 12 Pro', rating: 5, phoneLight: '#E5E5E5', phoneDark: '#2E2E2E' },
+    { id: 4, name: 'Midnight Matte', price: 849, old_price: 1199, badge: 'NEW', category: 'iPhone 15 Pro', rating: 5, phoneLight: '#D8D8D8', phoneDark: '#303030' },
+    { id: 5, name: 'Frosted Edge', price: 699, old_price: null, badge: null, category: 'iPhone 14', rating: 5, phoneLight: '#EBEBEB', phoneDark: '#282828' },
+    { id: 6, name: 'Pure Noir', price: 649, old_price: 899, badge: 'HOT', category: 'Samsung A55', rating: 5, phoneLight: '#E0E0E0', phoneDark: '#272727' },
+    { id: 7, name: 'Stone Series', price: 599, old_price: null, badge: null, category: 'OnePlus Nord 4', rating: 5, phoneLight: '#E3E3E3', phoneDark: '#2C2C2C' },
+    { id: 8, name: 'Linen Soft', price: 549, old_price: 799, badge: 'NEW', category: 'Realme GT 6', rating: 5, phoneLight: '#EFEFEF', phoneDark: '#242424' }
 ];
 
 async function loadProducts() {
@@ -246,30 +246,42 @@ async function loadProducts() {
     }
 
     products.forEach((p, idx) => {
-        const brand = (p.category || '').split(' ')[0];
+        // Extract brand and normalize to lowercase for filter matching
+        const brandRaw = (p.category || '').split(' ')[0];
+        const brand = brandRaw.toLowerCase();
         const card = document.createElement('div');
         card.setAttribute('data-brand', brand);
-        card.className = `product-card glass-card tilt-card reveal delay-${(idx % 4) + 1}`;
+        card.className = `product-card reveal delay-${(idx % 4) + 1}`;
 
         const stars = '★'.repeat(p.rating || 5) + '☆'.repeat(5 - (p.rating || 5));
-        const gradient = p.gradient || 'linear-gradient(135deg, #555, #888)';
-        const badgeClass = p.badge === 'Hot' ? 'badge-hot' : 'badge-new';
-        const badgeText = p.badge === 'Hot' ? 'Hot' : 'New';
-        const oldPriceHtml = p.old_price ? `<span class="muted small old-price">₹${p.old_price}</span>` : '';
+        const phoneLight = p.phoneLight || '#E8E8E8';
+        const phoneDark = p.phoneDark || '#2A2A2A';
+
+        // Badge HTML (only if badge exists)
+        let badgeHtml = '';
+        if (p.badge) {
+            const badgeClass = p.badge === 'HOT' ? 'badge-hot' : 'badge-new';
+            badgeHtml = `<div class="product-badge ${badgeClass}">${p.badge}</div>`;
+        }
+
+        // Old price HTML
+        const oldPriceHtml = p.old_price
+            ? `<span class="price-old">₹${p.old_price.toLocaleString()}</span>`
+            : '';
 
         card.innerHTML = `
-            <div class="product-image-area" style="background: ${gradient};">
-                <div class="product-badge ${badgeClass}">${badgeText}</div>
+            <div class="product-image-area">
+                ${badgeHtml}
                 <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
-                <div class="phone-shape"></div>
+                <div class="phone-shape" style="--phone-light: ${phoneLight}; --phone-dark: ${phoneDark};"></div>
             </div>
             <div class="product-info">
                 <div class="rating">${stars}</div>
                 <h3>${p.name}</h3>
-                <p class="muted small">${p.category}</p>
+                <p class="product-compat">${p.category}</p>
                 <div class="flex-between">
                     <div class="price-box">
-                        <span class="bold">₹${p.price}</span>
+                        <span class="price-current">₹${p.price.toLocaleString()}</span>
                         ${oldPriceHtml}
                     </div>
                     <button class="add-btn" aria-label="Add to cart">+</button>
@@ -279,6 +291,7 @@ async function loadProducts() {
         grid.appendChild(card);
     });
 
+    // Re-hook interactions for dynamic cards
     applyTilt();
     if (revealObserver) {
         document.querySelectorAll('.product-card.reveal').forEach(el => revealObserver.observe(el));
