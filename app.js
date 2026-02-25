@@ -1,8 +1,7 @@
 /**
  * AURA CASES - Premium Frontend JS
- * Version 3.0 - All Bugs Fixed Edition
- * Fixes: Stat counters, product cards, filters, scroll reveal,
- *        card tilt, custom cursor, wishlist/cart, responsive, navbar scroll
+ * Version 4.0 - Minimalist Luxury Edition
+ * Theme toggle, stat counters, products, filters, scroll effects
  */
 
 // ───────────────────────────────────────────────
@@ -20,63 +19,76 @@ try {
     console.warn('Supabase init skipped:', e.message);
 }
 
-let mouseX = 0, mouseY = 0;
-let followX = 0, followY = 0;
-let cursorDot = null, cursorFollow = null;
-
 // ───────────────────────────────────────────────
-// 2. Custom Cursor (Bug #6 fix)
+// 2. Theme Toggle System
 // ───────────────────────────────────────────────
-function initCursor() {
-    // Skip on touch / mobile
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+function initThemeToggle() {
+    const toggleBtn = document.getElementById('themeToggle');
+    const toggleBtnMobile = document.getElementById('themeToggleMobile');
+    const html = document.documentElement;
 
-    cursorDot = document.getElementById('cursor');
-    cursorFollow = document.getElementById('cursorFollow');
-    if (!cursorDot || !cursorFollow) return;
+    // Determine initial theme
+    const saved = localStorage.getItem('aura-theme');
+    let isDark;
 
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+    if (saved) {
+        isDark = saved === 'dark';
+    } else {
+        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
 
-        // Dot follows instantly
-        cursorDot.style.left = mouseX + 'px';
-        cursorDot.style.top = mouseY + 'px';
+    applyTheme(isDark);
 
-        // Expand on hoverable elements
-        const target = e.target;
-        if (target.closest('button, a, .tilt-card, .filter-btn, .social-btn')) {
-            cursorFollow.style.width = '70px';
-            cursorFollow.style.height = '70px';
-            cursorFollow.style.borderColor = '#FA6D9A';
-            cursorFollow.style.backgroundColor = 'rgba(250, 109, 154, 0.05)';
-        } else {
-            cursorFollow.style.width = '36px';
-            cursorFollow.style.height = '36px';
-            cursorFollow.style.borderColor = 'rgba(124, 109, 250, 0.5)';
-            cursorFollow.style.backgroundColor = 'transparent';
+    // Toggle handlers
+    function handleToggle() {
+        isDark = !isDark;
+        applyTheme(isDark);
+        localStorage.setItem('aura-theme', isDark ? 'dark' : 'light');
+    }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', handleToggle);
+    if (toggleBtnMobile) toggleBtnMobile.addEventListener('click', handleToggle);
+
+    // Listen for system preference changes (only if user hasn't manually set)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('aura-theme')) {
+            isDark = e.matches;
+            applyTheme(isDark);
         }
     });
 
-    animateCursor();
-}
+    function applyTheme(dark) {
+        if (dark) {
+            html.classList.add('dark');
+            html.classList.remove('light');
+        } else {
+            html.classList.add('light');
+            html.classList.remove('dark');
+        }
 
-function animateCursor() {
-    if (!cursorFollow) return;
-    followX += (mouseX - followX) * 0.12;
-    followY += (mouseY - followY) * 0.12;
-    cursorFollow.style.left = followX + 'px';
-    cursorFollow.style.top = followY + 'px';
-    requestAnimationFrame(animateCursor);
+        const icon = dark ? '☀️' : '🌙';
+
+        // Animate icon swap
+        [toggleBtn, toggleBtnMobile].forEach(btn => {
+            if (!btn) return;
+            const iconEl = btn.querySelector('.toggle-icon');
+            if (!iconEl) return;
+            btn.setAttribute('aria-pressed', String(!dark));
+            iconEl.style.transform = 'scale(0)';
+            setTimeout(() => {
+                iconEl.textContent = icon;
+                iconEl.style.transform = 'scale(1)';
+            }, 150);
+        });
+    }
 }
 
 // ───────────────────────────────────────────────
-// 3. Navbar Scroll Effect (Bug #9 fix)
+// 3. Navbar Scroll Effect
 // ───────────────────────────────────────────────
 function initScrollEffects() {
     const navbar = document.querySelector('.navbar');
     const scrollProgress = document.getElementById('scroll-progress');
-    const mesh = document.querySelector('.bg-mesh');
 
     if (!navbar && !scrollProgress) return;
 
@@ -84,13 +96,11 @@ function initScrollEffects() {
         const scrolled = window.scrollY;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-        // Scroll progress bar
         if (scrollProgress && maxScroll > 0) {
             const progress = Math.min((scrolled / maxScroll) * 100, 100);
             scrollProgress.style.width = progress + '%';
         }
 
-        // Navbar becomes more opaque past 50px
         if (navbar) {
             if (scrolled > 50) {
                 navbar.classList.add('scrolled');
@@ -98,16 +108,11 @@ function initScrollEffects() {
                 navbar.classList.remove('scrolled');
             }
         }
-
-        // Parallax mesh
-        if (mesh) {
-            mesh.style.transform = `translateY(${scrolled * 0.15}px)`;
-        }
     }, { passive: true });
 }
 
 // ───────────────────────────────────────────────
-// 4. Scroll Reveal Animation (Bug #4 fix)
+// 4. Scroll Reveal Animation
 // ───────────────────────────────────────────────
 let revealObserver;
 
@@ -125,7 +130,7 @@ function initReveal() {
 }
 
 // ───────────────────────────────────────────────
-// 5. Stat Counter Animation (Bug #1 fix)
+// 5. Stat Counter Animation
 // ───────────────────────────────────────────────
 function initStats() {
     const statsSection = document.querySelector('.stats-row');
@@ -149,7 +154,6 @@ function animateCounter(el) {
     const target = parseInt(el.getAttribute('data-target'), 10);
     if (isNaN(target) || target <= 0) return;
 
-    // Check if label says Satisfaction for % suffix
     const label = el.nextElementSibling;
     const isSatisfaction = label && label.textContent && label.textContent.includes('Satisfaction');
     const suffix = isSatisfaction ? '%' : '+';
@@ -160,8 +164,6 @@ function animateCounter(el) {
     function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-
-        // EaseOutExpo for dramatic counting
         const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         const current = Math.round(easedProgress * target);
 
@@ -177,14 +179,12 @@ function animateCounter(el) {
 }
 
 // ───────────────────────────────────────────────
-// 6. 3D Card Tilt Effect (Bug #5 fix)
+// 6. Subtle Card Tilt (kept but no color spotlight)
 // ───────────────────────────────────────────────
 function applyTilt() {
-    // Skip on touch devices
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
     document.querySelectorAll('.tilt-card').forEach(card => {
-        // Remove old listeners to prevent duplicates
         card.removeEventListener('mousemove', card._tiltMove);
         card.removeEventListener('mouseleave', card._tiltLeave);
 
@@ -192,26 +192,16 @@ function applyTilt() {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
-            // Cursor spotlight position
-            const px = (x / rect.width) * 100;
-            const py = (y / rect.height) * 100;
-            card.style.setProperty('--mx', `${px}%`);
-            card.style.setProperty('--my', `${py}%`);
-
-            // 3D rotation
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotX = ((y - centerY) / rect.height) * -10;
-            const rotY = ((x - centerX) / rect.width) * 10;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+            // Subtle tilt — reduced from 10deg to 5deg
+            const rotX = ((y - centerY) / rect.height) * -5;
+            const rotY = ((x - centerX) / rect.width) * 5;
+            card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-2px)`;
         };
 
         card._tiltLeave = function () {
             card.style.transform = '';
-            card.style.setProperty('--mx', '50%');
-            card.style.setProperty('--my', '50%');
         };
 
         card.addEventListener('mousemove', card._tiltMove);
@@ -220,7 +210,7 @@ function applyTilt() {
 }
 
 // ───────────────────────────────────────────────
-// 7. Product Cards (Bug #2 fix)
+// 7. Product Cards
 // ───────────────────────────────────────────────
 const demoProducts = [
     { id: 1, name: 'Aurora Dream', price: 899, old_price: 1299, badge: 'Hot', gradient: 'linear-gradient(135deg, #7C6DFA, #FA6D9A)', category: 'iPhone 15 Pro Max', rating: 5 },
@@ -239,7 +229,6 @@ async function loadProducts() {
 
     grid.innerHTML = '';
 
-    // Try Supabase, fallback to demo products
     let products = demoProducts;
     if (supabaseClient) {
         try {
@@ -259,9 +248,9 @@ async function loadProducts() {
         card.className = `product-card glass-card tilt-card reveal delay-${(idx % 4) + 1}`;
 
         const stars = '★'.repeat(p.rating || 5) + '☆'.repeat(5 - (p.rating || 5));
-        const gradient = p.gradient || 'linear-gradient(135deg, #7C6DFA, #FA6D9A)';
+        const gradient = p.gradient || 'linear-gradient(135deg, #555, #888)';
         const badgeClass = p.badge === 'Hot' ? 'badge-hot' : 'badge-new';
-        const badgeText = p.badge === 'Hot' ? 'Hot 🔥' : 'New';
+        const badgeText = p.badge === 'Hot' ? 'Hot' : 'New';
         const oldPriceHtml = p.old_price ? `<span class="muted small old-price">₹${p.old_price}</span>` : '';
 
         card.innerHTML = `
@@ -272,7 +261,7 @@ async function loadProducts() {
             </div>
             <div class="product-info">
                 <div class="rating">${stars}</div>
-                <h3 class="font-syne">${p.name}</h3>
+                <h3>${p.name}</h3>
                 <p class="muted small">${p.category}</p>
                 <div class="flex-between">
                     <div class="price-box">
@@ -286,7 +275,6 @@ async function loadProducts() {
         grid.appendChild(card);
     });
 
-    // Re-hook everything for dynamic cards
     applyTilt();
     if (revealObserver) {
         document.querySelectorAll('.product-card.reveal').forEach(el => revealObserver.observe(el));
@@ -294,19 +282,16 @@ async function loadProducts() {
     initButtonInteractions();
     initFilters();
 
-    // Re-initialize Lucide icons if loaded from CDN
     if (window.lucide && window.lucide.createIcons) {
         window.lucide.createIcons();
     }
 }
 
 // ───────────────────────────────────────────────
-// 8. Wishlist & Cart Interactions (Bug #7 fix)
+// 8. Wishlist & Cart Interactions
 // ───────────────────────────────────────────────
 function initButtonInteractions() {
-    // Wishlist ♡ → ♥ toggle
     document.querySelectorAll('.wishlist-btn').forEach(btn => {
-        // Skip if already bound
         if (btn._bound) return;
         btn._bound = true;
 
@@ -318,7 +303,6 @@ function initButtonInteractions() {
         });
     });
 
-    // Cart + → ✓ teal for 1.2s then reset
     document.querySelectorAll('.add-btn').forEach(btn => {
         if (btn._bound) return;
         btn._bound = true;
@@ -331,17 +315,17 @@ function initButtonInteractions() {
             btn.classList.add('success');
             btn.textContent = '✓';
 
-            // Confetti burst
+            // Monochrome confetti
             if (window.confetti) {
                 const rect = btn.getBoundingClientRect();
                 confetti({
-                    particleCount: 80,
-                    spread: 60,
+                    particleCount: 60,
+                    spread: 50,
                     origin: {
                         x: rect.left / window.innerWidth,
                         y: rect.top / window.innerHeight
                     },
-                    colors: ['#7C6DFA', '#FA6D9A', '#6DFADC']
+                    colors: ['#F5F5F5', '#AAAAAA', '#555555']
                 });
             }
 
@@ -354,25 +338,22 @@ function initButtonInteractions() {
 }
 
 // ───────────────────────────────────────────────
-// 9. Filter Pills (Bug #3 fix)
+// 9. Filter Pills
 // ───────────────────────────────────────────────
 function initFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     if (filterBtns.length === 0) return;
 
     filterBtns.forEach(btn => {
-        // Remove old listeners by cloning
         const newBtn = btn.cloneNode(true);
         btn.parentNode.replaceChild(newBtn, btn);
 
         newBtn.addEventListener('click', () => {
             const filter = newBtn.getAttribute('data-filter');
 
-            // Update active state
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             newBtn.classList.add('active');
 
-            // Filter product cards
             document.querySelectorAll('.product-card').forEach(card => {
                 const brand = card.getAttribute('data-brand') || '';
                 const isMatch = filter === 'all' || brand.toLowerCase() === filter.toLowerCase();
@@ -382,7 +363,6 @@ function initFilters() {
                     card.style.display = '';
                 } else {
                     card.classList.add('hidden');
-                    // Wait for CSS transition before hiding
                     setTimeout(() => {
                         if (card.classList.contains('hidden')) {
                             card.style.display = 'none';
@@ -398,28 +378,28 @@ function initFilters() {
 // 10. App Initialization
 // ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    // A. Custom cursor
-    initCursor();
+    // A. Theme system (must be first for correct icon state)
+    initThemeToggle();
 
-    // B. Scroll effects (navbar + progress bar)
+    // B. Scroll effects
     initScrollEffects();
 
-    // C. Scroll reveal animation
+    // C. Scroll reveal
     initReveal();
 
-    // D. Stat counter animation
+    // D. Stat counters
     initStats();
 
-    // E. Load products (async — handles Supabase fallback)
+    // E. Products
     loadProducts();
 
-    // F. Card tilt for static cards (categories, features)
+    // F. Card tilt for static cards
     applyTilt();
 
-    // G. Initialize Lucide icons if available
+    // G. Lucide icons
     if (window.lucide && window.lucide.createIcons) {
         window.lucide.createIcons();
     }
 
-    console.log('AURA CASES v3.0 — All Systems Operational ✨');
+    console.log('AURA CASES v4.0 — Minimalist Luxury ✦');
 });

@@ -5,11 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AURA CASES | Premium Device Protection</title>
+  <meta name="description"
+    content="Premium phone cases engineered for impact, designed for the elite. Military-grade protection meets minimalist luxury.">
 
-  <!-- Fonts -->
+  <!-- Fonts: Inter + Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@800&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@1,400&display=swap"
     rel="stylesheet">
 
   <!-- Icons (Lucide) -->
@@ -29,21 +32,10 @@
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
 
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follow" id="cursorFollow"></div>
-
-  <!-- Mesh Background -->
-  <div class="bg-mesh">
-    <div class="blob blob-purple"></div>
-    <div class="blob blob-pink"></div>
-    <div class="blob blob-teal"></div>
-    <div class="noise-overlay"></div>
-  </div>
-
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container nav-content">
-      <div class="logo font-syne">AURA <span class="text-gradient">CASES</span></div>
+      <div class="logo">AURA <span class="text-gradient">CASES</span></div>
 
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
@@ -54,7 +46,10 @@
       </ul>
 
       <div class="nav-actions">
-        <button class="btn btn-primary pill glow">Shop Now</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="toggle-icon">🌙</span>
+        </button>
+        <button class="btn btn-primary pill">Shop Now</button>
       </div>
     </div>
   </nav>
@@ -65,16 +60,16 @@
       <div class="reveal delay-1">
         <span class="badge-pill">Collection 2025</span>
       </div>
-      <h1 class="hero-title font-syne reveal delay-2">
+      <h1 class="hero-title reveal delay-2">
         Protect <span class="italic font-light">Your</span> <br>
-        <span class="text-gradient">World</span> in Style
+        <span>World</span> in Style
       </h1>
       <p class="hero-subtitle reveal delay-3">
-        Experience high-end device protection with our signature glassmorphism series. Engineered for impact, designed
-        for the elite.
+        Premium device protection engineered for impact, designed for those who appreciate
+        quiet luxury and understated excellence.
       </p>
       <div class="hero-btns reveal delay-4">
-        <button class="btn btn-gradient pill glow">View Collection</button>
+        <button class="btn btn-primary pill">View Collection</button>
         <button class="btn btn-glass pill">Custom Design</button>
       </div>
     </div>
@@ -90,19 +85,19 @@
   <!-- Marquee Ticker -->
   <div class="marquee">
     <div class="marquee-track">
-      <span>FREE WORLDWIDE SHIPPING</span> <span class="dot purple"></span>
-      <span>MILITARY DROP PROTECTION</span> <span class="dot pink"></span>
-      <span>CUSTOM UV PRINTING</span> <span class="dot teal"></span>
-      <span>MAGSAFE COMPATIBLE</span> <span class="dot purple"></span>
-      <span>1 YEAR WARRANTY</span> <span class="dot pink"></span>
-      <span>500+ MODELS SUPPORTED</span> <span class="dot teal"></span>
+      <span>FREE WORLDWIDE SHIPPING</span> <span class="dot"></span>
+      <span>MILITARY DROP PROTECTION</span> <span class="dot"></span>
+      <span>CUSTOM UV PRINTING</span> <span class="dot"></span>
+      <span>MAGSAFE COMPATIBLE</span> <span class="dot"></span>
+      <span>1 YEAR WARRANTY</span> <span class="dot"></span>
+      <span>500+ MODELS SUPPORTED</span> <span class="dot"></span>
       <!-- Repeat -->
-      <span>FREE WORLDWIDE SHIPPING</span> <span class="dot purple"></span>
-      <span>MILITARY DROP PROTECTION</span> <span class="dot pink"></span>
-      <span>CUSTOM UV PRINTING</span> <span class="dot teal"></span>
-      <span>MAGSAFE COMPATIBLE</span> <span class="dot purple"></span>
-      <span>1 YEAR WARRANTY</span> <span class="dot pink"></span>
-      <span>500+ MODELS SUPPORTED</span> <span class="dot teal"></span>
+      <span>FREE WORLDWIDE SHIPPING</span> <span class="dot"></span>
+      <span>MILITARY DROP PROTECTION</span> <span class="dot"></span>
+      <span>CUSTOM UV PRINTING</span> <span class="dot"></span>
+      <span>MAGSAFE COMPATIBLE</span> <span class="dot"></span>
+      <span>1 YEAR WARRANTY</span> <span class="dot"></span>
+      <span>500+ MODELS SUPPORTED</span> <span class="dot"></span>
     </div>
   </div>
 
@@ -110,19 +105,19 @@
   <section class="stats-row">
     <div class="container stats-grid">
       <div class="stat-cell reveal delay-1">
-        <div class="stat-num text-gradient font-syne" data-target="50000">0</div>
+        <div class="stat-num font-heading" data-target="50000">0</div>
         <div class="stat-label">Happy Customers</div>
       </div>
       <div class="stat-cell reveal delay-2">
-        <div class="stat-num text-gradient font-syne" data-target="120">0</div>
+        <div class="stat-num font-heading" data-target="120">0</div>
         <div class="stat-label">Phone Models</div>
       </div>
       <div class="stat-cell reveal delay-3">
-        <div class="stat-num text-gradient font-syne" data-target="500">0</div>
+        <div class="stat-num font-heading" data-target="500">0</div>
         <div class="stat-label">Unique Designs</div>
       </div>
       <div class="stat-cell reveal delay-4">
-        <div class="stat-num text-gradient font-syne" data-target="98">0</div>
+        <div class="stat-num font-heading" data-target="98">0</div>
         <div class="stat-label">Satisfaction Rate</div>
       </div>
     </div>
@@ -130,12 +125,12 @@
 
   <!-- Collections -->
   <section id="collections" class="container py-xl">
-    <h2 class="section-title font-syne reveal">Elite Collections</h2>
+    <h2 class="section-title font-heading reveal">Elite Collections</h2>
     <div class="category-grid">
       <div class="category-card tall glass-card reveal delay-1 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🌈</span>
-          <h3 class="font-syne">Gradient Series</h3>
+          <h3>Gradient Series</h3>
           <p class="muted">150+ Items</p>
           <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
         </div>
@@ -144,7 +139,7 @@
       <div class="category-card glass-card reveal delay-2 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🛡️</span>
-          <h3 class="font-syne">Rugged Pro</h3>
+          <h3>Rugged Pro</h3>
           <p class="muted">80+ Items</p>
           <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
         </div>
@@ -153,7 +148,7 @@
       <div class="category-card glass-card reveal delay-3 tilt-card">
         <div class="card-content">
           <span class="card-emoji">💎</span>
-          <h3 class="font-syne">Crystal Clear</h3>
+          <h3>Crystal Clear</h3>
           <p class="muted">45+ Items</p>
           <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
         </div>
@@ -162,7 +157,7 @@
       <div class="category-card wide glass-card reveal delay-4 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🎨</span>
-          <h3 class="font-syne">Artisan Prints</h3>
+          <h3>Artisan Prints</h3>
           <p class="muted">120+ Items</p>
           <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
         </div>
@@ -171,7 +166,7 @@
       <div class="category-card glass-card reveal delay-1 tilt-card">
         <div class="card-content">
           <span class="card-emoji">🧲</span>
-          <h3 class="font-syne">MagSafe Ready</h3>
+          <h3>MagSafe Ready</h3>
           <p class="muted">60+ Items</p>
           <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
         </div>
@@ -182,7 +177,7 @@
 
   <!-- Product Grid -->
   <section id="shop" class="container py-xl">
-    <h2 class="section-title font-syne reveal">Elite Selection</h2>
+    <h2 class="section-title font-heading reveal">Elite Selection</h2>
 
     <!-- Filter Pills -->
     <div class="filter-container reveal delay-1">
@@ -199,41 +194,41 @@
 
   <!-- Features -->
   <section id="features" class="container py-xl text-center">
-    <h2 class="section-title font-syne reveal">Built Different</h2>
+    <h2 class="section-title font-heading reveal">Built Different</h2>
     <div class="features-grid">
       <div class="feature-card glass-card reveal delay-1 tilt-card">
-        <div class="feature-icon glow-purple">🛡️</div>
-        <h3 class="font-syne">Military-Grade</h3>
+        <div class="feature-icon">🛡️</div>
+        <h3>Military-Grade</h3>
         <p class="muted">10ft drop tested protection with air-cushion technology.</p>
         <div class="hover-line"></div>
       </div>
       <div class="feature-card glass-card reveal delay-2 tilt-card">
-        <div class="feature-icon glow-pink">✨</div>
-        <h3 class="font-syne">UV Resistant</h3>
+        <div class="feature-icon">✨</div>
+        <h3>UV Resistant</h3>
         <p class="muted">Proprietary finish that prevents yellowing and keeps colors vivid.</p>
         <div class="hover-line"></div>
       </div>
       <div class="feature-card glass-card reveal delay-3 tilt-card">
-        <div class="feature-icon glow-teal">🌿</div>
-        <h3 class="font-syne">Eco Conscious</h3>
+        <div class="feature-icon">🌿</div>
+        <h3>Eco Conscious</h3>
         <p class="muted">Crafted with 60% recycled materials and plastic-free packaging.</p>
         <div class="hover-line"></div>
       </div>
       <div class="feature-card glass-card reveal delay-4 tilt-card">
-        <div class="feature-icon glow-purple">🧲</div>
-        <h3 class="font-syne">MagSafe Prep</h3>
+        <div class="feature-icon">🧲</div>
+        <h3>MagSafe Prep</h3>
         <p class="muted">Perfect alignment for powerful charging and accessory attachment.</p>
         <div class="hover-line"></div>
       </div>
       <div class="feature-card glass-card reveal delay-1 tilt-card">
-        <div class="feature-icon glow-pink">🎯</div>
-        <h3 class="font-syne">Precision Fit</h3>
+        <div class="feature-icon">🎯</div>
+        <h3>Precision Fit</h3>
         <p class="muted">Laser-cut accuracy for every port and tactile button feel.</p>
         <div class="hover-line"></div>
       </div>
       <div class="feature-card glass-card reveal delay-2 tilt-card">
-        <div class="feature-icon glow-teal">🎨</div>
-        <h3 class="font-syne">Custom Studio</h3>
+        <div class="feature-icon">🎨</div>
+        <h3>Custom Studio</h3>
         <p class="muted">Infinite possibilities with our in-house custom print engine.</p>
         <div class="hover-line"></div>
       </div>
@@ -242,12 +237,12 @@
 
   <!-- Testimonials -->
   <section class="container py-xl">
-    <h2 class="section-title font-syne reveal">Elite Reviews</h2>
+    <h2 class="section-title font-heading reveal">What They Say</h2>
     <div class="testimonial-grid">
       <div class="testimonial-card glass-card reveal delay-1">
-        <div class="quote-mark text-gradient">“</div>
-        <p class="muted italic">The quality exceeds anything else on the market. The glassmorphism look is stunning
-          under my office lights.</p>
+        <div class="quote-mark">"</div>
+        <p class="muted italic">The quality exceeds anything else on the market. Clean design that
+          looks stunning in any setting.</p>
         <div class="author">
           <span class="avatar">👨‍💻</span>
           <div>
@@ -257,7 +252,7 @@
         </div>
       </div>
       <div class="testimonial-card glass-card reveal delay-2">
-        <div class="quote-mark text-gradient">“</div>
+        <div class="quote-mark">"</div>
         <p class="muted italic">Fastest shipping I've experienced. Packaging was premium and the case fits my S24 Ultra
           like a glove.</p>
         <div class="author">
@@ -269,7 +264,7 @@
         </div>
       </div>
       <div class="testimonial-card glass-card reveal delay-3">
-        <div class="quote-mark text-gradient">“</div>
+        <div class="quote-mark">"</div>
         <p class="muted italic">Dropped my phone from a balcony—not a single scratch on the phone. Aura Cases are the
           real deal.</p>
         <div class="author">
@@ -286,13 +281,11 @@
   <!-- CTA Banner -->
   <section class="container py-xl">
     <div class="cta-banner glass-card reveal">
-      <div class="banner-glow-left"></div>
-      <div class="banner-glow-right"></div>
       <div class="banner-content">
-        <h2 class="font-syne">Find Your <span class="text-gradient">Perfect Case</span> Today</h2>
-        <p class="muted">Join 50,000+ elite users protecting their world in style.</p>
+        <h2 class="font-heading">Find Your <span>Perfect Case</span> Today</h2>
+        <p class="muted">Join 50,000+ discerning users who chose quiet excellence.</p>
         <div class="hero-btns justify-center mt-lg">
-          <button class="btn btn-gradient pill glow">Shop Catalog</button>
+          <button class="btn btn-primary pill">Shop Catalog</button>
           <button class="btn btn-glass pill">Contact Us</button>
         </div>
       </div>
@@ -303,8 +296,8 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <div class="logo font-syne mb-md">AURA <span class="text-gradient">CASES</span></div>
-        <p class="muted small mb-lg">Redefining mobile protection through futuristic aesthetics and elite engineering.
+        <div class="logo mb-md">AURA <span class="text-gradient">CASES</span></div>
+        <p class="muted small mb-lg">Redefining mobile protection through understated design and elite engineering.
           Stay Aura.</p>
         <div class="social-links">
           <a href="#" class="social-btn"><i data-lucide="twitter"></i></a>
@@ -314,21 +307,21 @@
         </div>
       </div>
       <div class="footer-links">
-        <h4 class="font-syne">Shop</h4>
+        <h4>Shop</h4>
         <a href="#">New Arrivals</a>
         <a href="#">Best Sellers</a>
         <a href="#">iPhone Cases</a>
         <a href="#">Samsung Cases</a>
       </div>
       <div class="footer-links">
-        <h4 class="font-syne">Support</h4>
+        <h4>Support</h4>
         <a href="#">Track Order</a>
         <a href="#">Shipping Policy</a>
         <a href="#">Returns</a>
         <a href="#">Contact Us</a>
       </div>
       <div class="footer-links">
-        <h4 class="font-syne">Company</h4>
+        <h4>Company</h4>
         <a href="#">Our Story</a>
         <a href="#">Sustainability</a>
         <a href="#">Careers</a>
@@ -343,6 +336,11 @@
       </div>
     </div>
   </footer>
+
+  <!-- Mobile Theme Toggle (floating) -->
+  <button class="theme-toggle-mobile" id="themeToggleMobile" aria-label="Toggle dark mode" aria-pressed="false">
+    <span class="toggle-icon">🌙</span>
+  </button>
 
   <script type="module" src="/app.js"></script>
 </body>
