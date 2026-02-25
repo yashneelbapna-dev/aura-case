@@ -102,7 +102,7 @@ function initScrollEffects() {
         }
 
         if (navbar) {
-            if (scrolled > 50) {
+            if (scrolled > 20) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
